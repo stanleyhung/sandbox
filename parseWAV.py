@@ -10,10 +10,10 @@ def error(actual, expected):
 	exit(1)
 
 #Get WAV information from file
-wavName = "26. I Need You"
+wavName = raw_input("Please enter the name of the WAV File to parse:\n")
 fileName = wavName + ".wav"
 print "Getting WAV metadata from file: " + fileName
-f = open(fileName, "r")
+f = open(fileName, "rb")
 header = f.read(4)
 if header != 'RIFF':
 	error(header, 'RIFF')
@@ -72,18 +72,19 @@ elif bytesPerSample == 4:
 #parse and write sample data
 print "Beginning to parse data...\n"
 done = False
+sampleNum = 1
 while True:
+	if sampleNum % 1000000 == 0:
+		print str(numSamples - sampleNum) + " samples remaining..."
 	for i in range(0, numChannels):
 		data = f.read(bytesPerSample)
 		if data != "":
 			data = struct.unpack(storageType, data)[0]
 			f2.write(str(data) + ',')
 		else:
-			print "length is: " + str(len(data))
-			print "data is: " + data
-			print "type is: " + str(type(data))
 			done = True
 	f2.write('\n')
+	sampleNum = sampleNum + 1
 	if done == True:
 		break
 f2.close()
