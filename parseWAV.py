@@ -14,6 +14,7 @@ wavName = raw_input("Please enter the name of the WAV File to parse:\n")
 fileName = wavName + ".wav"
 print "Getting WAV metadata from file: " + fileName
 f = open(fileName, "rb")
+#RIFF & WAV Header Information
 header = f.read(4)
 if header != 'RIFF':
 	error(header, 'RIFF')
@@ -25,8 +26,12 @@ fmtID = f.read(4)
 if fmtID != 'fmt ':
 	error(fmtID, 'fmt ')
 subChunkSize1 = struct.unpack('I', f.read(4))[0]
-if subChunkSize1 != 16:
+
+#FMT subChunk data
+if subChunkSize1 < 16:
 	error(subChunkSize1, 16)
+elif subChunkSize1 > 16:
+	difference = subChunkSize1 - 16
 audioFormat = struct.unpack('H', f.read(2))[0]
 if audioFormat != 1:
 	error(audioFormat, 1)
@@ -34,12 +39,16 @@ numChannels = struct.unpack('H', f.read(2))[0]
 if numChannels != 1 and numChannels != 2:
 	error(numChannels, 1)
 sampleRate = struct.unpack('I', f.read(4))[0]
-if sampleRate != 8000 and sampleRate != 44100:
+if sampleRate < 0:
 	error(sampleRate, 44100)
 byteRate = struct.unpack('I', f.read(4))[0]
 blockAlign = struct.unpack('H', f.read(2))[0]
 bitsPerSample = struct.unpack('H', f.read(2))[0]
 bytesPerSample = bitsPerSample / 8
+if subChunkSize1 > 16:
+	extraParamaters = f.read(difference)[0]
+
+#data header
 dataHeader = f.read(4)
 if dataHeader != 'data':
 	error(dataHeader, 'data')
