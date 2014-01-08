@@ -39,6 +39,8 @@ elif bitsPerSample == 16:
 	format = 'h'
 elif bitsPerSample == 32:
 	format = 'i'
+else:
+	format = 'x'
 
 #write data
 #for i in range(0, numSamples/3):
