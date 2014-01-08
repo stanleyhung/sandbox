@@ -67,4 +67,10 @@ for i in range(0, 7500):
 for i in range(0, 7500):
 	f.write(struct.pack(format, 127))
 
+for i in range(0, 7500):
+	f.write(struct.pack(format, 128))
+
+for i in range(0, 7500):
+	f.write(struct.pack(format, 127))	
+
 f.flush()
