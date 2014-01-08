@@ -3,7 +3,7 @@ import struct
 
 #set .wav file attributes
 fileName = "test.wav"
-numSamples = 7500*3
+numSamples = 7500*
 Numchannels = 1
 sampleRate = 6000
 bitsPerSample = 8
@@ -43,13 +43,28 @@ else:
 	format = 'x'
 
 #write data
-for i in range(0, numSamples/3):
+for i in range(0, 7500):
 	f.write(struct.pack(format, 128))
 
-for i in range(0, numSamples/3):
+for i in range(0, 7500):
 	f.write(struct.pack(format, 127))
 
-for i in range(0, numSamples/3):
+for i in range(0, 7500):
 	f.write(struct.pack(format, 128))
+
+for i in range(0, 7500):
+	f.write(struct.pack(format, 127))
+
+for i in range(0, 7500):
+	f.write(struct.pack(format, 128))
+
+for i in range(0, 7500):
+	f.write(struct.pack(format, 127))
+
+for i in range(0, 7500):
+	f.write(struct.pack(format, 128))
+
+for i in range(0, 7500):
+	f.write(struct.pack(format, 127))
 
 f.flush()
