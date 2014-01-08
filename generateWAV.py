@@ -3,7 +3,7 @@ import struct
 
 #set .wav file attributes
 fileName = "test.wav"
-numSamples = 7500*
+numSamples = 7500*10
 Numchannels = 1
 sampleRate = 6000
 bitsPerSample = 8
