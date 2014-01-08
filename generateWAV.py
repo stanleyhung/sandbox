@@ -33,9 +33,14 @@ f.write('data')
 f.write(struct.pack('i', subchunksize))
 
 #determine what struct to use to write data
+if bitsPerSample == 8:
+	format = 'B'
+elif bitsPerSample == 16:
+	format = 'h'
+elif bitsPerSample == 32:
+	format = 'i'
 
 #write data
 #for i in range(0, numSamples/3):
-
 
 f.flush()
